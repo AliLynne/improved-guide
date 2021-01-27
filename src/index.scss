@@ -1,0 +1,86 @@
+@mixin lightmode() {
+  --text-color: #111;
+  --link-color: #9f0dcd;
+  --background-color: #eee;
+  --box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+@mixin darkmode() {
+  --text-color: #fff;
+  --link-color: #faf697;
+  --background-color: #222;
+  --box-shadow: 0 0 6px rgba(255, 255, 255, 0.75);
+}
+body {
+  @include lightmode();
+  &.is_inverted {
+    @include darkmode();
+  }
+  @media (prefers-color-scheme: dark) {
+    @include darkmode();
+    &.is_inverted {
+      @include lightmode();
+    }
+  }
+
+  background-color: var(--background-color);
+  color: var(--text-color);
+  a {
+    color: var(--link-color);
+  }
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.themeToggle {
+  height: 2rem;
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
+.resume-page {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pdfWrapper {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.react-pdf {
+  &__Document {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__Page {
+    box-shadow: var(--box-shadow);
+
+    canvas {
+      max-width: 100%;
+    }
+  }
+
+  &__message {
+    padding: 20px;
+    color: var(--text-color);
+  }
+}
